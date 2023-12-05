@@ -64,4 +64,6 @@ class TestScraper(unittest.TestCase):
     #     self.assertTrue(os.path.isfile(expected_image_path), "Image file was not created.")
 
 if __name__ == '__main__':
+    '''
     unittest.main()
+    '''

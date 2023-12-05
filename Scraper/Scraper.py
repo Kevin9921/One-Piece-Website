@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import requests
 import mysql.connector
 from mysql.connector import Error
-import pandas as pd
 import os
 import unidecode as uc
 
@@ -158,13 +157,13 @@ def execute_query(connection, query):
     except Error as err:
         print(f"Error: '{err}'")
 
-def insert_varibles_into_table(connection, id, name):
+def insert_varibles_into_table(connection, id, name, url):
     cursor = connection.cursor()
     try:
-        mySql_insert_query = """INSERT INTO OnePiece_Characters (character_id, name) 
-                                VALUES (%s, %s) """
+        mySql_insert_query = """INSERT INTO OnePiece_Characters (character_id, name, image_url) 
+                                VALUES (%s, %s, %s) """
 
-        record = (id, name)
+        record = (id, name, url)
         cursor.execute(mySql_insert_query, record)
         connection.commit()
         print("Query successful")
@@ -213,9 +212,10 @@ formatedNames = formateName(canonNames)
 #execute_query(connection, create_teacher_table) # Execute our defined query
 
 
-
-#count = 1
-# for characters in temp:
-#     insert_varibles_into_table(connection, count, characters)
+#uncomment to add data to table
+# count = 1
+# for characters in formatedNames:
+#     image_path = os.path.join('character_images', f"{characters[0]}.jpg")
+#     insert_varibles_into_table(connection, count, characters[0], image_path)
 #     count = count + 1
 # print("data added to table")
