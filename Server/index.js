@@ -15,7 +15,7 @@ connection.connect(function(err) {
     if (err) {
       return console.error('error: ' + err.message);
     }
-    connection.query("SELECT * FROM onepiece_characters", 
+    connection.query("SELECT * FROM onepiece_characters LIMIT 3", 
         function (err, result) {
             if (err) throw err;
             charData = result
