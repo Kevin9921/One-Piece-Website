@@ -208,14 +208,14 @@ formatedNames = formateName(canonNames)
 #saveImage(formatedNames)
 
 #uncomment below to add to database
-#connection = create_db_connection("localhost", "root", "root", "one Piece") # Connect to the Database
-#execute_query(connection, create_teacher_table) # Execute our defined query
+connection = create_db_connection("localhost", "root", "root", "one Piece") # Connect to the Database
+execute_query(connection, create_teacher_table) # Execute our defined query
 
 
 #uncomment to add data to table
-# count = 1
-# for characters in formatedNames:
-#     image_path = os.path.join('character_images', f"{characters[0]}.jpg")
-#     insert_varibles_into_table(connection, count, characters[0], image_path)
-#     count = count + 1
-# print("data added to table")
+count = 1
+for characters in formatedNames:
+    image_path = '/character_images/' + f"{characters[0]}.jpg"
+    insert_varibles_into_table(connection, count, characters[0], image_path)
+    count = count + 1
+print("data added to table")

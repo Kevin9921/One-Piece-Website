@@ -42,17 +42,51 @@ function App() {
     )
   }, [])
 
-  useEffect(() => {
-    const storageRef = ref(storage, '/character_images/Ace.jpg');
+  // useEffect(() => {
+  //   const storageRef = ref(storage, '/character_images/Ace.jpg');
 
-    getDownloadURL(storageRef)
-      .then((url) => {
-        setImageURL(url);
+  //   getDownloadURL(storageRef)
+  //     .then((url) => {
+  //       setImageURL(url);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error retrieving download URL:', error);
+  //     });
+  // }, []);
+  // const getFirebaseImageURL = async (imagePath) => {
+  //   const storageRef = ref(storage, imagePath);
+  //   try {
+  //     const url = await getDownloadURL(storageRef);
+  //     return url;
+  //   } catch (error) {
+  //     console.error('Error retrieving download URL:', error);
+  //     return ''; // Return a placeholder or handle the error appropriately
+  //   }
+  // };
+  const getImageURLs = async () => {
+    const imageURLs = await Promise.all(
+      backendData.map(async (row) => {
+        const storageRef = ref(storage, row.image_url);
+        try {
+          const url = await getDownloadURL(storageRef);
+          return url;
+        } catch (error) {
+          console.error('Error retrieving download URL:', error);
+          return ''; // Return a placeholder or handle the error appropriately
+        }
       })
-      .catch((error) => {
-        console.error('Error retrieving download URL:', error);
-      });
-  }, []);
+    );
+
+    return imageURLs;
+  };
+
+  useEffect(() => {
+    getImageURLs().then((imageURLs) => {
+      setBackendData((prevData) =>
+        prevData.map((row, index) => ({ ...row, imageURL: imageURLs[index] }))
+      );
+    });
+  }, [backendData]);
 
 //   const storage = getStorage(app);
 
@@ -80,7 +114,7 @@ function App() {
               <img 
               
                 // src="/character_images/Ace.jpg"
-                src={imageURL}
+                src={row.image_url}
                 alt={row.name} 
                 style={{ maxWidth: '100px', maxHeight: '100px' }} />
               {/* console.log(`C:\\Users\\kevin\\projects\\Website\\ ${row.image_url}`) */}
