@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 //import { getStorage } from "firebase/storage";
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import './App.css';
 
 
 
@@ -106,18 +107,26 @@ function App() {
          
           //console.log('Image Path:', imagePath);
           return(
+            <div className='screen'>
+
+              <div className='characterContainer' key={i}>
+            
+                
+          
+                <img className='characterImage' 
+                
+                  // src="/character_images/Ace.jpg"
+                  src={row.image_url}
+                  alt={row.name} 
+                  // style={{ maxWidth: '300px', maxHeight: '300px' }} 
+                  />
+                
+                <input className='inputBox'
+                  type="text" 
     
-            <div key={i}>
-              <p>Character ID: {row.character_id}</p>
-              <p>Name: {row.name}</p>
-              <p>URL {row.image_url}</p>
-              <img 
-              
-                // src="/character_images/Ace.jpg"
-                src={row.image_url}
-                alt={row.name} 
-                style={{ maxWidth: '100px', maxHeight: '100px' }} />
-              {/* console.log(`C:\\Users\\kevin\\projects\\Website\\ ${row.image_url}`) */}
+              />
+                {/* console.log(`C:\\Users\\kevin\\projects\\Website\\ ${row.image_url}`) */}
+              </div>
             </div>
         )
       })
