@@ -22,6 +22,7 @@
 }
 
 
+
 .characterContainer {
   display: flex;
   flex-direction: column;
@@ -43,6 +44,18 @@
 
 }
 
+.timer-wrapper {
+  position: absolute;
+  top: 50px;
+  /* Adjust the top distance as needed */
+  right: 50px;
+  /* Adjust the right distance as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center
+}
+
 
 .inputBox {
   width: 30%;
@@ -62,6 +75,31 @@
   .inputBox {
     width: 60%;
   }
+
+  .timer-wrapper {
+
+    /* or relative, depending on your layout needs */
+    top: 10px;
+    right: 10px;
+  }
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30px;
+}
+
+.points-counter {
+  display: flex;
+  align-self: center;
+
+}
+
+.points {
+  font-size: 30px;
+  /* Make the points circular */
 }
 
 .picture {
@@ -88,14 +126,4 @@
 
 .App-link {
   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
 }
